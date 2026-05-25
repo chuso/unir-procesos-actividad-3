@@ -24,10 +24,10 @@ jobs:
         run: uv run ruff format --check .
 
       - name: Verificar tipos (mypy)
-        run: uv run mypy calculadora.py test_calculadora.py
+        run: uv run mypy src/ tests/
 
       - name: Ejecutar tests (unittest)
-        run: uv run coverage run -m unittest test_calculadora.py -v
+        run: uv run coverage run -m unittest discover -s tests -v
 
       - name: Generar reporte de cobertura
         run: uv run coverage xml

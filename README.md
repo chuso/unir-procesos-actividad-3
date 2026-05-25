@@ -31,7 +31,7 @@ uv run python calculadora.py
 ### Ejecutar las pruebas
 
 ```bash
-uv run python -m unittest test_calculadora.py -v
+uv run python -m unittest discover -s tests -v
 ```
 
 ### Linting y formato
@@ -44,7 +44,7 @@ uv run ruff format .
 ### Comprobación de tipos
 
 ```bash
-uv run mypy calculadora.py test_calculadora.py
+uv run mypy src/ tests/
 ```
 
 ## Diseño de las pruebas
