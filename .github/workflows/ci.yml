@@ -27,4 +27,11 @@ jobs:
         run: uv run mypy calculadora.py test_calculadora.py
 
       - name: Ejecutar tests (unittest)
-        run: uv run python -m unittest test_calculadora.py -v
+        run: uv run coverage run -m unittest test_calculadora.py -v
+
+      - name: Generar reporte de cobertura
+        run: uv run coverage xml
+
+      - uses: codecov/codecov-action@v4
+        with:
+          files: coverage.xml

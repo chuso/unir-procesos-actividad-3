@@ -5,6 +5,7 @@ requires-python = ">=3.9"
 
 [dependency-groups]
 dev = [
+    "coverage>=7.10.7",
     "mypy>=1.10",
     "ruff>=0.9",
 ]
