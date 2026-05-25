@@ -1,0 +1,23 @@
+[project]
+name = "calculadora"
+version = "0.1.0"
+requires-python = ">=3.9"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.10",
+    "ruff>=0.9",
+]
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+# Features del lintern que activamos. Por defecto solo está E (pycodestyle) y F (pyflakes)
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.10"
+disallow_untyped_defs = true
+warn_return_any = true
+warn_unused_ignores = true

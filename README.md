@@ -9,26 +9,40 @@ Asignatura: **Procesos en Ingeniería del Software**
 
 ## Requisitos
 
-- Python 3.7 o superior. No se requieren dependencias externas (`unittest` forma parte de la librería estándar).
+- Python 3.9 o superior.
+- [`uv`](https://docs.astral.sh/uv/) para gestión de dependencias y entorno virtual.
+
+## Configuración del entorno
+
+```bash
+uv sync --group dev
+```
 
 ## Ejecución
 
 ### Ejecutar la calculadora (demo manual)
 
 ```bash
-python calculadora.py
+uv run python calculadora.py
 ```
 
-### Ejecutar las pruebas unitarias
+### Ejecutar las pruebas
 
 ```bash
-python -m unittest test_calculadora.py -v
+uv run python -m unittest test_calculadora.py -v
 ```
 
-Alternativamente:
+### Linting y formato
 
 ```bash
-python test_calculadora.py
+uv run ruff check .
+uv run ruff format .
+```
+
+### Comprobación de tipos
+
+```bash
+uv run mypy calculadora.py test_calculadora.py
 ```
 
 ## Diseño de las pruebas
