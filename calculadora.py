@@ -21,69 +21,69 @@ class Calculadora:
     unitarias (cada prueba es independiente).
     """
 
-    def sumar(self, a, b):
+    def sumar(self, a: float, b: float) -> float:
         """
         Devuelve la suma de dos números.
 
         Parámetros
         ----------
-        a : int | float
+        a : float
             Primer sumando.
-        b : int | float
+        b : float
             Segundo sumando.
 
         Devuelve
         --------
-        int | float
+        float
             Resultado de a + b.
         """
         return a + b
 
-    def restar(self, a, b):
+    def restar(self, a: float, b: float) -> float:
         """
         Devuelve la resta de dos números (minuendo menos sustraendo).
 
         Parámetros
         ----------
-        a : int | float
+        a : float
             Minuendo.
-        b : int | float
+        b : float
             Sustraendo.
 
         Devuelve
         --------
-        int | float
+        float
             Resultado de a - b.
         """
         return a - b
 
-    def multiplicar(self, a, b):
+    def multiplicar(self, a: float, b: float) -> float:
         """
         Devuelve el producto de dos números.
 
         Parámetros
         ----------
-        a : int | float
+        a : float
             Primer factor.
-        b : int | float
+        b : float
             Segundo factor.
 
         Devuelve
         --------
-        int | float
+        float
             Resultado de a * b.
         """
         return a * b
 
-    def dividir(self, a, b):
+    def dividir(self, a: float, b: float) -> float:
         """
         Devuelve el cociente de dos números.
 
         Parámetros
         ----------
-        a : int | float
+        a : float
             Dividendo.
-        b : int | float
+        b : float
             Divisor. No puede ser 0.
 
         Devuelve
