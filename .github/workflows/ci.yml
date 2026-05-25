@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Instalar dependencias
+        run: uv sync --group dev
+
+      - name: Lint (ruff)
+        run: uv run ruff check .
+
+      - name: Validar formato (ruff)
+        run: uv run ruff format --check .
+
+      - name: Verificar tipos (mypy)
+        run: uv run mypy calculadora.py test_calculadora.py
+
+      - name: Ejecutar tests (unittest)
+        run: uv run python -m unittest test_calculadora.py -v
