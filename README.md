@@ -1,5 +1,7 @@
 # Actividad 3 grupal — Diseño de pruebas de software
 
+[![codecov](https://codecov.io/github/chuso/unir-procesos-actividad-3/graph/badge.svg?token=NM71JRV9EW)](https://codecov.io/github/chuso/unir-procesos-actividad-3)
+
 Asignatura: **Procesos en Ingeniería del Software**
 
 ## Contenido
