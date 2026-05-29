@@ -95,6 +95,7 @@ Dentro de este apartado se han tomado las siguientes decisiones:
 ## 4.3 Estrategia de pruebas unitarias
 
 Se han diseñado un total de 21 pruebas unitarias con la librería unittest (biblioteca estándar de Python), aplicando las técnicas de caja negra:
+
 •	Partición de equivalencia: se identifican clases de equivalencia para cada operación (operandos positivos, negativos, cero, decimales y combinaciones de signo) y se selecciona al menos un caso representativo de cada una.
 
 •	Valores límite y casos especiales: se prueban explícitamente los elementos neutros (0 en suma/resta, 1 en multiplicación), el absorbente (0 en multiplicación) y el caso límite de la división por cero.
