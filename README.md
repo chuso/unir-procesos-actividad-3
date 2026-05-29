@@ -130,7 +130,7 @@ Para el seguimiento del desarrollo se ha utilizado un repositorio alojado en Git
 
 Enlace al repositorio: https://github.com/chuso/unir-procesos-actividad-3
 
-## 4.6 Conclusión
+### 4.6 Conclusión
 
 El proyecto cumple con los requisitos de calidad más importantes para su envergadura. Así su complejidad ciclomática es mínima (media de 1,4), se cubre al 100 % tanto los métodos como las ramas, hay ratio de 5,25 pruebas por método y se gestiona de forma explícita el único caso de error posible. Se ha aplicado de forma combinada el marco ISO/IEC 25010, con métricas y técnicas de prueba.
 
