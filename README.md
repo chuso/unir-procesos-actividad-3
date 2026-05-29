@@ -66,11 +66,11 @@ Para cada operación se han definido varios casos siguiendo el material del Tema
 | **Total** | **21** | |
 
 
-# 4. Calidad y métricas
+## 4. Calidad y métricas
 
 La calidad del software, según el modelo ISO/IEC 25010, queda definida por un conjunto de atributos (funcionalidad, fiabilidad, usabilidad, eficiencia, mantenibilidad, portabilidad, compatibilidad y seguridad) que pueden medirse de forma cuantitativa mediante métricas. En este apartado se describe cómo se han abordado los atributos relevantes para el proyecto y se aportan las métricas obtenidas sobre el código entregado.
 
-## 4.1 Atributos de calidad aplicados
+### 4.1 Atributos de calidad aplicados
 
 Dada la naturaleza acotada del proyecto (una calculadora con cuatro operaciones), los atributos de la ISO/IEC 25010 con repercusión directa son los siguientes:
 
@@ -80,7 +80,7 @@ Dada la naturaleza acotada del proyecto (una calculadora con cuatro operaciones)
 | Fiabilidad (tolerancia a fallos) | La división controla explícitamente el divisor nulo y lanza una excepción _ValueError_ descriptiva en lugar de propagar la _ZeroDivisionError_ nativa. |
 | Mantenibilidad (analizabilidad y capacidad de prueba) | Complejidad ciclomática baja (media 1,4), métodos independientes y autodocumentados con _docstrings_, suite de pruebas reproducible con un único comando.|
 
-## 4.2 Decisiones de diseño orientadas a la calidad
+### 4.2 Decisiones de diseño orientadas a la calidad
 
 Dentro de este apartado se han tomado las siguientes decisiones:
 
@@ -92,7 +92,7 @@ Dentro de este apartado se han tomado las siguientes decisiones:
 
 •	Gestión explícita de errores: la división por cero se valida antes de operar y lanza una excepción _ValueError_ con un mensaje descriptivo, en lugar de propagar la _ZeroDivisionError_ nativa de Python.
 
-## 4.3 Estrategia de pruebas unitarias
+### 4.3 Estrategia de pruebas unitarias
 
 Se han diseñado un total de 21 pruebas unitarias con la librería _unittest_ (biblioteca estándar de Python), aplicando las técnicas de caja negra:
 
@@ -106,7 +106,7 @@ Se han diseñado un total de 21 pruebas unitarias con la librería _unittest_ (b
 
 •	Comparación de flotantes: para evitar falsos negativos derivados de la representación binaria de los decimales se utiliza _assertAlmostEqual_ en lugar de _assertEqual_.
 
-## 4.4 Métricas obtenidas
+### 4.4 Métricas obtenidas
 
 Las siguientes métricas se han calculado de forma automática sobre el código fuente con la herramienta _radon_ (análisis estático de código Python).
 
@@ -124,7 +124,7 @@ Las siguientes métricas se han calculado de forma automática sobre el código 
 
 Los resultados de ejecución han sido los siguientes: De las 21 pruebas ejecutadas, 21 han sido superadas, produciéndose 0 fallos y 0 errores, con un tiempo de ejecución inferior a 10 ms.
 
-## 4.5 Control de versiones e integración continua
+### 4.5 Control de versiones e integración continua
 
 Para el seguimiento del desarrollo se ha utilizado un repositorio alojado en GitHub. Además, se ha configurado un flujo de integración continua mediante GitHub Actions que ejecuta automáticamente la suite de pruebas en cada _push_ al repositorio. Esta automatización es coherente con la noción de prueba como parte del diseño aproximándose al enfoque de _Test-Driven Development_.
 
