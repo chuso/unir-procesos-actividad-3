@@ -68,31 +68,69 @@ Para cada operación se han definido varios casos siguiendo el material del Tema
 
 # 4. Calidad y métricas
 
-La calidad del software es importante porque permite que una aplicación funcione correctamente, sea más fácil de entender y también más sencilla de mantener en el futuro. En este proyecto se ha desarrollado una calculadora en Python que realiza las cuatro operaciones básicas: suma, resta, multiplicación y división. Para asegurar que el programa funcionara bien, se han aplicado distintas pruebas y buenas prácticas durante el desarrollo.
+La calidad del software, según el modelo ISO/IEC 25010, queda definida por un conjunto de atributos (funcionalidad, fiabilidad, usabilidad, eficiencia, mantenibilidad, portabilidad, compatibilidad y seguridad) que pueden medirse de forma cuantitativa mediante métricas. En este apartado se describe cómo se han abordado los atributos relevantes para el proyecto y se aportan las métricas obtenidas sobre el código entregado.
 
-El código está organizado mediante una clase llamada `Calculadora`, donde cada operación tiene su propio método independiente. Esto hace que el programa esté más ordenado y sea más fácil de leer. Además, cada método tiene comentarios y explicaciones que ayudan a entender qué hace cada parte del código.
+## 4.1 Atributos de calidad aplicados
 
-También se ha tenido en cuenta el control de errores. Por ejemplo, en la operación de división se controla el caso en que un usuario intente dividir por cero. En esta situación, el programa lanza un error con un mensaje para evitar fallos inesperados.
+Dada la naturaleza acotada del proyecto (una calculadora con cuatro operaciones), los atributos de la ISO/IEC 25010 con repercusión directa son los siguientes:
 
-Otro aspecto importante del proyecto ha sido el uso de Git y GitHub para el control de versiones. Gracias a ello, se pudieron registrar todos los cambios realizados durante el desarrollo y mantener un historial completo de modificaciones. El uso de commits permitió seguir la evolución del proyecto de forma organizada y facilitó el mantenimiento del código.
+| Atributo (ISO/IEC 25010) | Aplicación en este proyecto |
+|-----------|-------------|
+| Funcionalidad (corrección) | Las 21 pruebas unitarias verifican que las cuatro operaciones devuelven el resultado matemáticamente correcto en todos los casos diseñados. |
+| Fiabilidad (tolerancia a fallos) | La división controla explícitamente el divisor nulo y lanza una excepción _ValueError_ descriptiva en lugar de propagar la _ZeroDivisionError_ nativa. |
+| Mantenibilidad (analizabilidad y capacidad de prueba) | Complejidad ciclomática baja (media 1,4), métodos independientes y autodocumentados con docstrings, suite de pruebas reproducible con un único comando.|
 
-Además, se utilizaron herramientas de automatización mediante GitHub Actions para ejecutar pruebas y comprobaciones automáticas cada vez que se realizaban cambios en el repositorio. Esto ayudó a detectar errores rápidamente y a mejorar la estabilidad de la aplicación.
+## 4.2 Decisiones de diseño orientadas a la calidad
 
-Para comprobar que todo funcionaba correctamente se realizaron pruebas unitarias utilizando la librería `unittest` de Python. Estas pruebas permiten verificar automáticamente que cada operación devuelve el resultado esperado.
+Dentro de este apartado se han tomado las siguientes decisiones:
 
-Entre las métricas y aspectos de calidad que se han trabajado destacan:
+•	Encapsulación: las cuatro operaciones se ofrecen como métodos de la clase Calculadora, lo que separa responsabilidades y facilita las pruebas unitarias.
 
-- La organización y claridad del código.
-- La separación de cada operación en métodos independientes.
-- El uso de Git y GitHub para el control de versiones.
-- El seguimiento del desarrollo mediante commits.
-- La automatización de pruebas con GitHub Actions.
-- El control de errores en casos especiales, como la división por cero.
-- La realización de pruebas unitarias para todas las operaciones.
-- La comprobación de distintos tipos de datos: positivos, negativos, cero y números decimales.
+•	Métodos puros: no se almacena estado entre llamadas. Cada operación depende únicamente de sus argumentos, lo que elimina efectos colaterales y aísla cada prueba.
 
-Las pruebas unitarias se diseñaron para comprobar diferentes situaciones. En la suma, por ejemplo, se probaron números positivos, negativos, decimales y cero. Lo mismo se hizo en las operaciones de resta y multiplicación. En la división, además de comprobar operaciones normales, también se verificó que el programa se comportara correctamente cuando el divisor era cero.
+•	Documentación _inline_: todos los métodos disponen de _docstrings_ con descripción de parámetros, valor devuelto y excepciones.
 
-Otro aspecto importante es que las pruebas están organizadas siguiendo una estructura clara (*Arrange, Act y Assert*), lo que facilita entender qué se está probando en cada caso. Además, para comparar números decimales se utilizó `assertAlmostEqual`, evitando problemas de precisión con números flotantes.
+•	Gestión explícita de errores: la división por cero se valida antes de operar y lanza una excepción _ValueError_ con un mensaje descriptivo, en lugar de propagar la _ZeroDivisionError_ nativa de Python.
 
-Los resultados obtenidos fueron positivos, ya que todas las pruebas se ejecutaron correctamente y la calculadora respondió de manera adecuada en todos los casos probados. Gracias a estas pruebas se pudo comprobar que la aplicación es estable, funciona correctamente y gestiona bien tanto las operaciones normales como los posibles errores.
+## 4.3 Estrategia de pruebas unitarias
+
+Se han diseñado un total de 21 pruebas unitarias con la librería unittest (biblioteca estándar de Python), aplicando las técnicas de caja negra:
+•	Partición de equivalencia: se identifican clases de equivalencia para cada operación (operandos positivos, negativos, cero, decimales y combinaciones de signo) y se selecciona al menos un caso representativo de cada una.
+
+•	Valores límite y casos especiales: se prueban explícitamente los elementos neutros (0 en suma/resta, 1 en multiplicación), el absorbente (0 en multiplicación) y el caso límite de la división por cero.
+
+•	Patrón _Arrange_ / _Act_ / _Assert_: cada prueba sigue las tres fases, con nombrado de métodos en formato test_<operacion>_<escenario>_<resultado>.
+
+•	Aislamiento: mediante el método _setUp__()_, cada prueba recibe una instancia nueva de Calculadora, evitando compartir estado.
+
+•	Comparación de flotantes: para evitar falsos negativos derivados de la representación binaria de los decimales se utiliza _assertAlmostEqual_ en lugar de _assertEqual_.
+
+## 4.4 Métricas obtenidas
+
+Las siguientes métricas se han calculado de forma automática sobre el código fuente con la herramienta _radon_ (análisis estático de código Python).
+
+| Métrica | Valor medido | Interpretación |
+|---|---|---|
+| SLOC (calculadora.py) | 17 | Líneas de código fuente sin comentarios ni líneas en blanco. |
+| SLOC (test_calculadora.py) | 73 | Volumen de pruebas muy superior al del código a probar. Indicador de buena cobertura por diseño. |
+| Complejidad ciclomática media (VG) | 1.4 (A) | Métrica de McCabe. Categoría A según radon (complejidad muy baja, fácil de probar y mantener). |
+| VG por método | 1, 1, 1, 2 | Sumar, restar y multiplicar carecen de ramas; dividir tiene una rama (control de divisor cero). |
+| WMC (Weighted Methods per Class) | 5 | Métrica CK: suma de la complejidad ciclomática de los métodos de la clase Calculadora. |
+| Nº de pruebas unitarias | 21 | 5 para suma, 5 para resta, 5 para multiplicación y 6 para división (2 de ellas de gestión de errores). |
+| Ratio pruebas/método | 5.25 | Más de cinco casos por método; por encima del mínimo aceptado (3 por operación). |
+| Cobertura de métodos | 100 % | Los 4 métodos de la clase Calculadora se ejecutan en las pruebas. |
+| Cobertura de ramas (decisiones) | 100 % | La única decisión existente (`b == 0` en dividir) se ejecuta tanto en verdadero como en falso. |
+
+Los resultados de ejecución han sido los siguientes: De las 21 pruebas ejecutadas, 21 han sido superadas, produciéndose 0 fallos y 0 errores, con un tiempo de ejecución inferior a 10 ms.
+
+## 4.5 Control de versiones e integración continua
+
+Para el seguimiento del desarrollo se ha utilizado un repositorio alojado en GitHub. Además, se ha configurado un flujo de integración continua mediante GitHub Actions que ejecuta automáticamente la suite de pruebas en cada _push_ al repositorio. Esta automatización es coherente con la noción de prueba como parte del diseño aproximándose al enfoque de _Test-Driven Development_.
+
+Enlace al repositorio: https://github.com/chuso/unir-procesos-actividad-3
+
+## 4.6 Conclusión
+
+El proyecto cumple con los requisitos de calidad más importantes para su envergadura. Así su complejidad ciclomática es mínima (media de 1,4), se cubre al 100 % tanto los métodos como las ramas, hay ratio de 5,25 pruebas por método y se gestiona de forma explícita el único caso de error posible. Se ha aplicado de forma combinada el marco ISO/IEC 25010, con métricas y técnicas de prueba.
+
+
