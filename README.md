@@ -78,7 +78,7 @@ Dada la naturaleza acotada del proyecto (una calculadora con cuatro operaciones)
 |-----------|-------------|
 | Funcionalidad (corrección) | Las 21 pruebas unitarias verifican que las cuatro operaciones devuelven el resultado matemáticamente correcto en todos los casos diseñados. |
 | Fiabilidad (tolerancia a fallos) | La división controla explícitamente el divisor nulo y lanza una excepción _ValueError_ descriptiva en lugar de propagar la _ZeroDivisionError_ nativa. |
-| Mantenibilidad (analizabilidad y capacidad de prueba) | Complejidad ciclomática baja (media 1,4), métodos independientes y autodocumentados con docstrings, suite de pruebas reproducible con un único comando.|
+| Mantenibilidad (analizabilidad y capacidad de prueba) | Complejidad ciclomática baja (media 1,4), métodos independientes y autodocumentados con _docstrings_, suite de pruebas reproducible con un único comando.|
 
 ## 4.2 Decisiones de diseño orientadas a la calidad
 
@@ -94,7 +94,7 @@ Dentro de este apartado se han tomado las siguientes decisiones:
 
 ## 4.3 Estrategia de pruebas unitarias
 
-Se han diseñado un total de 21 pruebas unitarias con la librería unittest (biblioteca estándar de Python), aplicando las técnicas de caja negra:
+Se han diseñado un total de 21 pruebas unitarias con la librería _unittest_ (biblioteca estándar de Python), aplicando las técnicas de caja negra:
 
 •	Partición de equivalencia: se identifican clases de equivalencia para cada operación (operandos positivos, negativos, cero, decimales y combinaciones de signo) y se selecciona al menos un caso representativo de cada una.
 
@@ -114,7 +114,7 @@ Las siguientes métricas se han calculado de forma automática sobre el código 
 |---|---|---|
 | SLOC (calculadora.py) | 17 | Líneas de código fuente sin comentarios ni líneas en blanco. |
 | SLOC (test_calculadora.py) | 73 | Volumen de pruebas muy superior al del código a probar. Indicador de buena cobertura por diseño. |
-| Complejidad ciclomática media (VG) | 1.4 (A) | Métrica de McCabe. Categoría A según radon (complejidad muy baja, fácil de probar y mantener). |
+| Complejidad ciclomática media (VG) | 1.4 (A) | Métrica de McCabe. Categoría A según _radon_ (complejidad muy baja, fácil de probar y mantener). |
 | VG por método | 1, 1, 1, 2 | Sumar, restar y multiplicar carecen de ramas; dividir tiene una rama (control de divisor cero). |
 | WMC (Weighted Methods per Class) | 5 | Métrica CK: suma de la complejidad ciclomática de los métodos de la clase Calculadora. |
 | Nº de pruebas unitarias | 21 | 5 para suma, 5 para resta, 5 para multiplicación y 6 para división (2 de ellas de gestión de errores). |
